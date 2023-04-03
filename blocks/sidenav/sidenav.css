@@ -1,14 +1,13 @@
-sidenav {
+.sidenav {
   padding: 2rem;
-  background-color: var(--overlay-background-color);
   font-size: var(--body-font-size-s);
 }
 
-sidenav .sidenav {
+.sidenav .sidenav {
   max-width: 1200px;
   margin: auto;
 }
 
-sidenav .sidenav p {
+.sidenav .sidenav p {
   margin: 0;
 }

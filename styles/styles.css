@@ -18,6 +18,7 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+  --header-background-color: #139e01;
 
   /* fonts */
   --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
@@ -38,7 +39,7 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 35px;
 
 }
 
@@ -245,5 +246,5 @@ main .section.highlight {
 main.main-content {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  margin: 0px 264px 0px 264px;
+  margin: 199px 264px;
 }
