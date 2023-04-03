@@ -140,6 +140,17 @@ export default async function decorate(block) {
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
+
+    // logo Nav
+    const logoNav = document.createElement('div');
+    logoNav.classList.add('nav-logo');
+    navWrapper.prepend(logoNav);
+
+    // social nav
+    const socialNav = document.createElement('div');
+    socialNav.classList.add('nav-social');
+    navWrapper.prepend(socialNav);
+
     block.append(navWrapper);
   }
 }
