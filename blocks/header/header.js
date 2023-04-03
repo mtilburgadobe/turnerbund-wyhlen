@@ -152,6 +152,5 @@ export default async function decorate(block) {
     navWrapper.prepend(socialNav);
 
     block.append(navWrapper);
-
   }
 }
