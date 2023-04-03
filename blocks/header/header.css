@@ -93,14 +93,14 @@ header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   box-sizing: border-box;
   display: block;
-  /*position: relative;*/
+  position: relative;
   width: 20px;
 }
 
 header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
-  /*position: absolute;*/
+  position: absolute;
   background: currentcolor;
 }
 
@@ -208,7 +208,7 @@ header nav .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .nav-drop {
-    /*position: relative;*/
+    position: relative;
     padding-right: 16px;
     cursor: pointer;
   }
@@ -216,7 +216,7 @@ header nav .nav-sections ul > li > ul > li {
   header nav .nav-sections .nav-drop::after {
     content: '';
     display: inline-block;
-    /*position: absolute;*/
+    position: absolute;
     top: .5em;
     right: 2px;
     transform: rotate(135deg);
@@ -242,18 +242,18 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections > ul > li {
     flex: 0 1 auto;
-    /*position: relative;*/
+    position: relative;
     font-weight: 500;
   }
 
   header nav .nav-sections > ul > li > ul {
     display: none;
-    /*position: relative;*/
+    position: relative;
   }
 
   header nav .nav-sections > ul > li[aria-expanded="true"] > ul {
     display: block;
-    /*position: absolute;*/
+    position: absolute;
     left: -1em;
     width: 200px;
     margin-top: 12px;
@@ -264,7 +264,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections > ul > li > ul::before {
     content: '';
-    /*position: absolute;*/
+    position: absolute;
     top: -8px;
     left: 8px;
     width: 0;

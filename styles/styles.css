@@ -246,5 +246,5 @@ main .section.highlight {
 main.main-content {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  margin: 199px 264px 0px 264px;
+  margin: 199px 264px 0px;
 }
