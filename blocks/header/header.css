@@ -38,7 +38,8 @@ header nav[aria-expanded="true"] {
 
 @media (min-width: 900px) {
   header nav {
-    display: flex;
+    /*display: flex;*/
+    display: grid;
     justify-content: space-between;
   }
 
