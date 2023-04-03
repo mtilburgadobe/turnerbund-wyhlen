@@ -65,7 +65,6 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
-  //buildSidebar(main);
 }
 
 /**
@@ -101,18 +100,6 @@ export function addFavIcon(href) {
 }
 
 /**
- * Loads a block named 'footer' into footer
- * @param footer footer element
- * @returns {Promise}
- */
-export function loadSidenav(sidenav) {
-  const sidenavBlock = buildBlock('sidenav', '');
-  sidenav.append(sidenavBlock);
-  decorateBlock(sidenavBlock);
-  return loadBlock(sidenavBlock);
-}
-
-/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -126,7 +113,6 @@ async function loadLazy(doc) {
 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
-  //loadSidenav(doc.querySelector('sidenav'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
