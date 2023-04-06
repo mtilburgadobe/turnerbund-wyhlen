@@ -138,20 +138,18 @@ h2 {
 }
 
 .form .button {
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--text-white);
-  background-color: var(--forms-accent-color);
-  border-color: var(--forms-accent-color);
-  padding: 10px 30px;
-  min-width: 270px;
-  transition: .3s;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  line-height: 13px;
+  background-color: var(--link-hover-color);
+  border-color: var(--link-hover-color);
+  font-size: 1em;
 }
 
 .form .button:hover {
-  border-color: var(--forms-accent-color-dark);
-  background-color: var(--forms-accent-color-dark);
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
 }
 
 .form .form-submit-wrapper {
