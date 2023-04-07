@@ -262,3 +262,13 @@ main.main-content {
   grid-template-columns: 1fr 2fr;
   margin: 199px 164px;
 }
+
+
+@media (max-width: 600px) {
+  main.main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 2%;
+  }
+}
+
