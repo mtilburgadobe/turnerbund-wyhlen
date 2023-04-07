@@ -1,4 +1,9 @@
-import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
+import {
+  readBlockConfig,
+  decorateIcons,
+  decorateBlock,
+  loadBlock,
+} from '../../scripts/lib-franklin.js';
 
 /**
  * loads and decorates the sidenav
@@ -21,5 +26,11 @@ export default async function decorate(block) {
 
     decorateIcons(sidenav);
     block.append(sidenav);
+
+    const form = block.querySelector('.form');
+    if (form) {
+      decorateBlock(form);
+      await loadBlock(form);
+    }
   }
 }
