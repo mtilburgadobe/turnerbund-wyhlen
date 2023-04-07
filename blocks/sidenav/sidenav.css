@@ -72,8 +72,9 @@
 }
 
 .sidenav .sidemenu li a::before {
-  content: "\f105";
-  font-family: fontawesome, sans-serif;
+  content: url('/icons/angle-right.svg');
+  width: 0.45em;
+  height: 0.45em;
   position: absolute;
   left: 0;
 }
