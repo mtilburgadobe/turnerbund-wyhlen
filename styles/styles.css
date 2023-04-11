@@ -237,9 +237,32 @@ main .section {
   padding: 16px 16px;
 }
 
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0 2%;
+  margin-top: 30px;
+}
+
 @media (min-width: 600px) {
   main .section {
     padding: 64px 32px;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 0 2%;
+    margin-top: 30px;
+    margin: 30px 164px;
+  }
+
+  main .sidenav {
+    order: 1;
+  }
+
+  main .main-content {
+    order: 2;
   }
 }
 
@@ -255,9 +278,6 @@ main .section.highlight {
   background-color: var(--highlight-background-color);
 }
 
-main.main-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: 0 2%;
-  margin-top: 30px;
-}
+
+
+
