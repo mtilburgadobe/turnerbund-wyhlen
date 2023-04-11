@@ -25,7 +25,16 @@
   color: var(--header-background-color);
 }
 
-.sidenav div > div > ul > li {
+.sidenav ul {
+  padding: 0;
+  margin: 0;
+}
+
+.sidenav .sidemenu ul {
+  list-style: outside none none;
+}
+
+.sidenav .sidemenu li {
   border-bottom: 1px solid lightgrey;
   margin-bottom: 5px;
   padding-bottom: 5px;
@@ -35,15 +44,44 @@
   font-weight: inherit;
   outline: 0;
   vertical-align: baseline;
-  list-style: outside none none;
 }
 
-.sidenav a {
-  font-size: 14px;
+.sidenav .sidemenu li:last-child {
+  border: none;
+}
+
+.sidenav .sidemenu li a {
   color: #5f5f5f;
+  line-height: 26px;
+  padding-left: 22px;
+  position: relative;
+  display: inline-block;
 }
 
-.sidenav a:hover {
+.sidenav .sidelinks li a {
+  color: var(--header-background-color);
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.sidenav .sidemenu li a:hover {
   color: var(--header-background-color);
   text-decoration: none;
 }
+
+.sidenav .sidemenu li a::before {
+  content: url('/icons/angle-right.svg');
+  width: 0.45em;
+  height: 0.45em;
+  position: absolute;
+  left: 0;
+}
+
+
+.sidenav .sidelinks ul {
+  list-style: disc;
+  margin: 0 0 15px 20px;
+}
+
