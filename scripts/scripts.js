@@ -32,11 +32,11 @@ function buildHeroBlock(main) {
 }
 
 function buildSidebar(main) {
-  main.classList.add('main-content');
+  main.querySelectorAll(':scope > div').forEach((section) => section.classList.add('main-content'));
   const sidenav = document.createElement('div');
-  sidenav.classList.add('sidenav');
+  sidenav.classList.add('side-content');
   sidenav.append(buildBlock('sidenav', ' '));
-  main.prepend(sidenav);
+  main.append(sidenav);
 }
 
 /**
