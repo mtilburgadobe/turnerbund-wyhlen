@@ -36,7 +36,7 @@ function buildSidebar(main) {
   const sidenav = document.createElement('div');
   sidenav.classList.add('sidenav');
   sidenav.append(buildBlock('sidenav', ' '));
-  main.prepend(sidenav);
+  main.append(sidenav);
 }
 
 /**
