@@ -24,31 +24,34 @@ export default async function decorate(block) {
 
     const blockChildren = footer.firstElementChild.children;
     footer.firstElementChild.classList.add('footer-title');
+
     const footerGallery = document.createElement('div');
     footerGallery.classList.add('footer-gallery');
+    footer.append(footerGallery);
+
     const footerImpressum = document.createElement('div');
     footerImpressum.classList.add('footer-impressum');
-    footer.append(footerGallery);
     footer.append(footerImpressum);
 
     const numChildren = blockChildren.length;
     for (let i = 0; i < numChildren; i += 1) {
-      if (blockChildren[i] && blockChildren[i].tagName === 'P') {
-        if (blockChildren[i].children[0]
-            && blockChildren[i].children[0].tagName === 'A'
-            && blockChildren[i].children[0].children[0]
-            && blockChildren[i].children[0].children[0].tagName === 'PICTURE') {
-          blockChildren[i].classList.add('footer-gallery-item');
-          footerGallery.appendChild(blockChildren[i]);
+      const thisBlock = blockChildren[i];
+      if (thisBlock && thisBlock.tagName === 'P') {
+        if (thisBlock.children[0]
+            && thisBlock.children[0].tagName === 'A'
+            && thisBlock.children[0].children[0]
+            && thisBlock.children[0].children[0].tagName === 'PICTURE') {
+          thisBlock.classList.add('footer-gallery-item');
+          footerGallery.appendChild(thisBlock);
+          i -= 1;
         } else {
-          blockChildren[i].classList.add('footer-impressum');
-          footerImpressum.appendChild(blockChildren[i]);
+          thisBlock.classList.add('footer-impressum');
+          footerImpressum.appendChild(thisBlock);
+          i -= 1;
         }
-        i -= 1;
-      } else if (blockChildren[i] && blockChildren[i].tagName === 'UL') {
-        blockChildren[i].classList.add('impressum');
-        footerImpressum.appendChild(blockChildren[i]);
-        i -= 1;
+      } else if (thisBlock && thisBlock.tagName === 'UL') {
+        thisBlock.classList.add('impressum');
+        footerImpressum.appendChild(thisBlock);
       }
     }
   }
