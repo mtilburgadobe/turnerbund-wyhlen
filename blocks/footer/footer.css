@@ -10,10 +10,6 @@ footer .footer {
   max-width: 1200px;
   margin: auto;
 }
-/*
-footer .footer p {
-  margin: 0;
-}*/
 
 footer .footer h4 {
   background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
@@ -34,11 +30,26 @@ footer .footer h4 {
   vertical-align: baseline;
 }
 
+footer .footer-gallery {
+  display: grid;
+  padding: 0 5%;
+}
+
+@media (min-width: 600px) {
+  footer .footer-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 750px) {
+  footer .footer-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (min-width: 900px) {
   footer .footer-gallery {
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 0 5%;
   }
 
   footer .footer-gallery p {
@@ -82,12 +93,3 @@ footer .footer-impressum a:hover {
   color: var(--link-hover-color);
   text-decoration: none;
 }
-/*
-footer .footer a:hover {
-    background-image: url('/icons/icons.svg#external-light');
-    display: block;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    transition-property: visibility,opacity,background-color;
-}*/

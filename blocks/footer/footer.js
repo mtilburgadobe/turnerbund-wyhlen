@@ -33,27 +33,23 @@ export default async function decorate(block) {
 
     const numChildren = blockChildren.length;
     for (let i = 0; i < numChildren; i += 1) {
-      console.log(blockChildren[i]);
-      //console.log(numChildren);
-      
-      if (blockChildren[i] && blockChildren[i].tagName == 'P'){
-        if (blockChildren[i].children[0] &&
-            blockChildren[i].children[0].tagName == 'A' &&
-            blockChildren[i].children[0].children[0] &&
-            blockChildren[i].children[0].children[0].tagName == 'PICTURE') {
-          blockChildren[i].classList.add("footer-gallery-item")
+      if (blockChildren[i] && blockChildren[i].tagName === 'P') {
+        if (blockChildren[i].children[0]
+            && blockChildren[i].children[0].tagName === 'A'
+            && blockChildren[i].children[0].children[0]
+            && blockChildren[i].children[0].children[0].tagName === 'PICTURE') {
+          blockChildren[i].classList.add('footer-gallery-item');
           footerGallery.appendChild(blockChildren[i]);
         } else {
-          blockChildren[i].classList.add("footer-impressum")
+          blockChildren[i].classList.add('footer-impressum');
           footerImpressum.appendChild(blockChildren[i]);
         }
         i -= 1;
-      } else if (blockChildren[i] && blockChildren[i].tagName == 'UL') {
-        blockChildren[i].classList.add("impressum")
+      } else if (blockChildren[i] && blockChildren[i].tagName === 'UL') {
+        blockChildren[i].classList.add('impressum');
         footerImpressum.appendChild(blockChildren[i]);
         i -= 1;
       }
     }
-
   }
 }
