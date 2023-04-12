@@ -32,7 +32,7 @@ function buildHeroBlock(main) {
 }
 
 function buildSidebar(main) {
-  main.querySelectorAll(':scope > div').forEach((section) => section.classList.add('main-content'));  
+  main.querySelectorAll(':scope > div').forEach((section) => section.classList.add('main-content'));
   const sidenav = document.createElement('div');
   sidenav.classList.add('side-content');
   sidenav.append(buildBlock('sidenav', ' '));
