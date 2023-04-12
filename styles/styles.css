@@ -40,6 +40,7 @@
 
   /* nav height */
   --nav-height: 35px;
+  --header-height: 170px;
 
 }
 
@@ -69,6 +70,9 @@ body.appear {
   display: unset;
 }
 
+header {
+  height: var(--header-height);
+}
 
 
 h1, h2, h3,
@@ -240,11 +244,11 @@ main {
 }
 
 /* clearfix main */
-main:after { 
+main::after {
   content: " "; 
   display: table;
   clear: both;
-} 
+}
 
 main .side-content {
   width: 100%;
