@@ -1,8 +1,21 @@
 /* header and nav layout */
 header .nav-social {
+  display: inline-block;
   background-color: var(--header-background-color);
   width: 100%;
   height: var(--nav-height);
+  font-family: FontAwesome;
+  color: white;
+  font-size: 14px;
+}
+
+header .fb-link {
+  float: right;
+  /*padding-right: 10%;*/
+}
+
+header .fb-link:before {
+    content: "\f082";/*       \f16d";*/
 }
 
 header .nav-logo {

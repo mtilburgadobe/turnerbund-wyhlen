@@ -2,7 +2,7 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
-
+/*
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -18,8 +18,8 @@ function closeOnEscape(e) {
       nav.querySelector('button').focus();
     }
   }
-}
-
+}*/
+/*
 function openOnKeydown(e) {
   const focused = document.activeElement;
   const isNavDrop = focused.className === 'nav-drop';
@@ -29,17 +29,20 @@ function openOnKeydown(e) {
     toggleAllNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
-}
+}*/
+/*
 
 function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
-}
+}*/
 
 /**
  * Toggles all nav sections
  * @param {Element} sections The container element
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
+
+
 function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
@@ -52,9 +55,11 @@ function toggleAllNavSections(sections, expanded = false) {
  * @param {Element} navSections The nav sections within the container element
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
+
+/*
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
-  const button = nav.querySelector('.nav-hamburger button');
+  //const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
@@ -84,6 +89,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     window.removeEventListener('keydown', closeOnEscape);
   }
 }
+*/
 
 /**
  * decorates the header, mainly the nav
@@ -123,6 +129,16 @@ export default async function decorate(block) {
       });
     }
 
+    // Social links and brand logo end up in here
+    const navBrand = nav.querySelector('.nav-brand');
+    if (navBrand) {
+      console.log(navBrand)
+      const numChildren = navBrand.children.length;
+      for (let i = 0; i < numChildren; i += 1) {
+        console.log(navBrand[i]);
+      }
+    }
+/*
     // hamburger for mobile
     const hamburger = document.createElement('div');
     hamburger.classList.add('nav-hamburger');
@@ -135,12 +151,12 @@ export default async function decorate(block) {
     // prevent mobile nav behavior on window resize
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
-
+*/
     decorateIcons(nav);
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
-
+/*
     // logo Nav
     const logoNav = document.createElement('div');
     logoNav.classList.add('nav-logo');
@@ -150,6 +166,15 @@ export default async function decorate(block) {
     const socialNav = document.createElement('div');
     socialNav.classList.add('nav-social');
     navWrapper.prepend(socialNav);
+
+    // Facebook link
+    const fbDiv = document.createElement('div');
+    const fbLink = document.createElement('a');
+    fbLink.classList.add('fb-link');
+    //fbDiv.append(fbLink);
+    const fbI = document.createElement('i');
+    fbLink.append(fbI);
+    socialNav.append(fbLink);*/
 
     block.append(navWrapper);
   }
