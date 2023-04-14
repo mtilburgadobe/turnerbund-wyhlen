@@ -10,10 +10,11 @@ import {
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
+  loadBlock,
   loadCSS,
 } from './lib-franklin.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['cards']; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
 /**
@@ -77,6 +78,8 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    const sidenav = main.querySelector('.sidenav');
+    await loadBlock(sidenav);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
