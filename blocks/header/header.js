@@ -41,7 +41,6 @@ function focusNavSection() {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 
-
 function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
@@ -54,7 +53,6 @@ function toggleAllNavSections(sections, expanded = false) {
  * @param {Element} navSections The nav sections within the container element
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
-
 
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
@@ -89,7 +87,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -116,7 +113,6 @@ export default async function decorate(block) {
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
-
       // Add home icon to nav-sections
       const homeIcon = document.createElement('li');
       const homeLink = document.createElement('a');
@@ -143,11 +139,11 @@ export default async function decorate(block) {
       const numChildren = navBrand.children.length;
       for (let i = 0; i < numChildren; i += 1) {
         // if it's a link, then it's a social icon
-        if (navBrand.children[i].children[0] 
+        if (navBrand.children[i].children[0]
           && navBrand.children[i].children[0].tagName === 'A') {
           navBrand.children[i].classList.add('social-icon');
         } else {
-          navBrand.children[i].classList.add('brand-logo'); 
+          navBrand.children[i].classList.add('brand-logo');
         }
       }
     }
@@ -179,7 +175,7 @@ export default async function decorate(block) {
     const socialNav = document.createElement('div');
     socialNav.classList.add('nav-social');
     navWrapper.prepend(socialNav);
-    
+
     // Move social icons to nav-social div
     const socialIcon1 = nav.querySelector('.social-icon');
     if (socialIcon1) {
