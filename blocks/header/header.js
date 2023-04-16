@@ -177,14 +177,10 @@ export default async function decorate(block) {
     navWrapper.prepend(socialNav);
 
     // Move social icons to nav-social div
-    const socialIcon1 = nav.querySelector('.social-icon');
-    if (socialIcon1) {
-      socialNav.appendChild(socialIcon1);
-    }
-    const socialIcon2 = nav.querySelector('.social-icon');
-    if (socialIcon1) {
-      socialNav.appendChild(socialIcon2);
-    }
+    nav.querySelectorAll('.social-icon').forEach((navSection) => {
+      socialNav.appendChild(navSection);
+    });
+
     const brandLogo = nav.querySelector('.brand-logo');
     if (brandLogo) {
       logoNav.appendChild(brandLogo);
