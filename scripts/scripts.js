@@ -46,7 +46,6 @@ function buildSidebar(main) {
  */
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
     buildSidebar(main);
   } catch (error) {
     // eslint-disable-next-line no-console
