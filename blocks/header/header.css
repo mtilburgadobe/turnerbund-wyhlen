@@ -9,19 +9,51 @@ header .nav-social {
   font-size: 14px;
 }
 
-header .fb-link {
+header .nav-social p {
+  width: 25px;
   float: right;
-  /*padding-right: 10%;*/
 }
 
-header .fb-link:before {
-    content: "\f082";/*       \f16d";*/
+header .social-icon {
+  display: inline-block;
+  background-color: var(--header-background-color);
+  width: 100%;
+  height: var(--nav-height);
+  font-family: FontAwesome;
+  color: white;
+  font-size: 14px;
+}
+
+header .icon-fb:before {
+  content: "\f082";
+  color: white;
+}
+
+header .icon-instagram:before {
+  content: "\f16d";
+  color: white;
+}
+
+header .icon-home {
+  font-family: FontAwesome;
+  color: white;
+  font-size: 14px;
+}
+
+header .icon-home:before {
+  content: "\f015";
+  color: white;
 }
 
 header .nav-logo {
+  display: inline-block;
   background-color: white;
   width: 100%;
   height: 100px;
+}
+
+header .nav-logo img {
+  float: right;
 }
 
 header .nav-wrapper {
@@ -181,7 +213,9 @@ header nav .nav-sections {
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
-  background-color: var(--overlay-color);
+  background-color: var(--header-background-color); /*var(--overlay-color);*/
+  color: white;
+  padding: 0 15px;
 }
 
 header nav[aria-expanded="true"] .nav-sections {
@@ -271,7 +305,7 @@ header nav .nav-sections ul > li > ul > li {
     width: 200px;
     margin-top: 12px;
     padding: 1em;
-    background-color: var(--highlight-background-color);
+    background-color: var(--header-background-color);
     white-space: initial;
   }
 

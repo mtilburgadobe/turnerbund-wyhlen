@@ -116,6 +116,15 @@ export default async function decorate(block) {
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
+
+      // Add home icon to nav-sections
+      const homeIcon = document.createElement('li');
+      const homeLink = document.createElement('a');
+      homeLink.href = '/';
+      homeIcon.classList.add('icon-home');
+      homeIcon.append(homeLink);
+      navSections.children[0].prepend(homeIcon);
+
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
         navSection.addEventListener('click', () => {
@@ -131,10 +140,15 @@ export default async function decorate(block) {
     // Social links and brand logo end up in here
     const navBrand = nav.querySelector('.nav-brand');
     if (navBrand) {
-      console.log(navBrand)
       const numChildren = navBrand.children.length;
       for (let i = 0; i < numChildren; i += 1) {
-        console.log(navBrand[i]);
+        // if it's a link, then it's a social icon
+        if (navBrand.children[i].children[0] 
+          && navBrand.children[i].children[0].tagName === 'A') {
+          navBrand.children[i].classList.add('social-icon');
+        } else {
+          navBrand.children[i].classList.add('brand-logo'); 
+        }
       }
     }
 
@@ -155,7 +169,7 @@ export default async function decorate(block) {
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
-/*
+
     // logo Nav
     const logoNav = document.createElement('div');
     logoNav.classList.add('nav-logo');
@@ -165,15 +179,20 @@ export default async function decorate(block) {
     const socialNav = document.createElement('div');
     socialNav.classList.add('nav-social');
     navWrapper.prepend(socialNav);
-
-    // Facebook link
-    const fbDiv = document.createElement('div');
-    const fbLink = document.createElement('a');
-    fbLink.classList.add('fb-link');
-    //fbDiv.append(fbLink);
-    const fbI = document.createElement('i');
-    fbLink.append(fbI);
-    socialNav.append(fbLink);*/
+    
+    // Move social icons to nav-social div
+    const socialIcon1 = nav.querySelector('.social-icon');
+    if (socialIcon1) {
+      socialNav.appendChild(socialIcon1);
+    }
+    const socialIcon2 = nav.querySelector('.social-icon');
+    if (socialIcon1) {
+      socialNav.appendChild(socialIcon2);
+    }
+    const brandLogo = nav.querySelector('.brand-logo');
+    if (brandLogo) {
+      logoNav.appendChild(brandLogo);
+    }
 
     block.append(navWrapper);
   }
