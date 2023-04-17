@@ -2,7 +2,9 @@
 header .nav-social {
   display: inline-block;
   background-color: var(--header-background-color);
-  width: 1170px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
   height: var(--nav-height);
 }
 
@@ -12,7 +14,7 @@ header nav p {
 }
 
 header .nav-social p {
-  width: 25px;
+  width: 1px;
   float: right;
 }
 
@@ -54,9 +56,10 @@ header .nav-logo {
 }
 
 header .brand-logo {
-  margin-right: auto;
-  width: 1170px;
   margin-top: 25px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 header .nav-logo img {
@@ -231,6 +234,9 @@ header nav .nav-sections ul  {
   padding-left: 0;
   font-size: var(--body-font-size-s);
   font-weight: 500;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 header nav .nav-sections ul > li {
