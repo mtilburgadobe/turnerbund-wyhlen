@@ -27,3 +27,7 @@ indices:
         select: head > meta[name="description"]
         value: |
           attribute(el, 'content')
+      eventDate:
+        select: main div.main-content.section div.default-content-wrapper > p:nth-of-type(5) > em
+        value: |
+          innerHTML(el)
