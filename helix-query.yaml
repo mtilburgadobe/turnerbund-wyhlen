@@ -23,3 +23,6 @@ indices:
       title:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
+      eventDate:
+        select: head > meta[property="Test"]
+        value: attribute(el, "content")
