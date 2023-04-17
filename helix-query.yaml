@@ -23,3 +23,10 @@ indices:
       title:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
+      description:
+        select: main > div > div > p:nth-of-type(4)
+        value: |
+          attribute(el "content")
+      test:
+        select: head > meta[name="test"]
+        value: attribute(el, "content")
