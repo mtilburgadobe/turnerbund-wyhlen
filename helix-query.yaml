@@ -23,10 +23,19 @@ indices:
       title:
         select: head > meta[property="og:title"]
         value: attribute(el, "content")
-      description:
-        select: main > div > div > p:nth-of-type(4)
+      image:
+        select: head > meta[property="og:image"]
         value: |
-          attribute(el "content")
-      test:
-        select: head > meta[name="test"]
+          match(attribute(el, 'content'), 'https:\/\/[^/]+(\/.*)')
+      description:
+        select: main > div > p:nth-of-type(3)
+        value: textContent(el)
+      eventDate:
+        select: main > div > p:nth-of-type(4)
+        value: textContent(el)
+      publicationDate:
+        select: head > meta[name="publicationdate"]
+        value: attribute(el, "content")
+      author:
+        select: head > meta[name="author"]
         value: attribute(el, "content")
