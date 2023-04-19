@@ -28,13 +28,10 @@ indices:
         value: |
           match(attribute(el, 'content'), 'https:\/\/[^/]+(\/.*)')
       description:
-        select: main > div > p:nth-of-type(3)
+        select: main > div > p:nth-of-type(2)
         value: textContent(el)
-      eventDate:
-        select: main > div > p:nth-of-type(4)
-        value: textContent(el)
-      publicationDate:
-        select: head > meta[name="publicationdate"]
+      publishdate:
+        select: head > meta[name="publishdate"]
         value: attribute(el, "content")
       author:
         select: head > meta[name="author"]
