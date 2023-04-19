@@ -77,7 +77,7 @@ export function renderPagination(entries, page, limit) {
 }
 
 function renderListItem({
-  path, title, teaser, image, description
+  path, title, image, description,
 }) {
   const imageElement = createOptimizedPicture(image, title, false, [
     { width: '500' },

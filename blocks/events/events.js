@@ -1,8 +1,5 @@
-import { getEvents } from '../../scripts/scripts.js'
-import { 
-  createOptimizedPicture,
-  readBlockConfig
-} from '../../scripts/lib-franklin.js';
+import { getEvents } from '../../scripts/scripts.js';
+import { readBlockConfig } from '../../scripts/lib-franklin.js';
 import createList from '../../scripts/list.js';
 
 function createEvents(events, block) {

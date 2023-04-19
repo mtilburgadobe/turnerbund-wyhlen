@@ -43,7 +43,7 @@ export async function getEvents(limit) {
     '/events/query-index-events.json',
     window.location.origin,
   );
-  let index = 'events';
+  const index = 'events';
   if (limit) {
     indexUrl.searchParams.set('limit', limit);
   }
