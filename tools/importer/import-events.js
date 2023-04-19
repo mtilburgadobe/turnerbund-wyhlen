@@ -74,17 +74,6 @@ export default {
     // define the main element: the one that will be transformed to Markdown
     const content = document.body.querySelector('.content-area');
 
-    // Detect if this is an "event" page
-    const eventNav = document.body.querySelector('.post-navigation');
-    if(eventNav) {
-      // Add a Navigation Block at the end
-      console.log('############## found it!');
-      console.log(eventNav);
-    } else {
-      console.log('---------------- no go');
-      return 0;
-    }
-
     // create navigation block
     createEventNavigation(content, document);
 
@@ -97,7 +86,7 @@ export default {
     WebImporter.DOMUtils.remove(body, [
       '.post-navigation',
       '.post-cats-list',
-      '.entry-meta'
+      '.entry-meta',
     ]);
 
     return content;
