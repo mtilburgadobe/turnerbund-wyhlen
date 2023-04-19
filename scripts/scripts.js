@@ -43,9 +43,10 @@ export async function getEvents(limit) {
     '/events/query-index-events.json',
     window.location.origin,
   );
-  const index = 'events';
+  let index = 'events';
   if (limit) {
     indexUrl.searchParams.set('limit', limit);
+    index = index.concat(`-${limit}`);
   }
 
   const eventEntries = await getIndex(index, indexUrl.toString());
