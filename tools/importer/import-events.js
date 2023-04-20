@@ -39,7 +39,13 @@ const createMetadata = (main, document) => {
 
   const publishDate = document.querySelector('.published');
   if (publishDate) {
-    meta.PublishDate = publishDate;
+    console.log (publishDate);
+    if (publishDate.hasAttributes) {
+      for (const attr of publishDate.attributes) {
+           if (attr.name === 'datetime' )
+            meta.PublishDate = attr.value;
+      }
+    }
   }
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
