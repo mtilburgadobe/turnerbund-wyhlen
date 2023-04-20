@@ -39,11 +39,11 @@ const createMetadata = (main, document) => {
 
   const publishDate = document.querySelector('.published');
   if (publishDate) {
-    console.log (publishDate);
+    console.log(publishDate);
     if (publishDate.hasAttributes) {
+      // eslint-disable-next-line no-restricted-syntax
       for (const attr of publishDate.attributes) {
-           if (attr.name === 'datetime' )
-            meta.PublishDate = attr.value;
+        if (attr.name === 'datetime') meta.PublishDate = attr.value;
       }
     }
   }
