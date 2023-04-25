@@ -31,7 +31,6 @@ footer .footer h4 {
 
 footer .footer-gallery {
   display: grid;
-  padding: 0 5%;
 }
 
 @media (min-width: 600px) {

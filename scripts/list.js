@@ -1,4 +1,4 @@
-import { createOptimizedPicture, loadCSS, toClassName } from './lib-franklin.js';
+import { createOptimizedPicture, toClassName } from './lib-franklin.js';
 
 function getSelectionFromUrl(field) {
   return (
@@ -117,8 +117,6 @@ export default function createList(
   root,
   customListItemRenderer,
 ) {
-  loadCSS('../styles/list.css', () => {});
-
   let page = parseInt(getSelectionFromUrl('page'), 10);
   page = Number.isNaN(page) ? 1 : page;
 
