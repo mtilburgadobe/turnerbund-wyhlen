@@ -69,6 +69,11 @@ footer .footer-gallery {
   }
 }
 
+footer .footer-gallery-item {
+  height: 105px;
+  width: 235px;
+}
+
 footer .footer-gallery img {
   height: 100%;
   width: 100%;
