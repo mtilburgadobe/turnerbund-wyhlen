@@ -53,6 +53,11 @@ main .form form {
     grid-template-columns: repeat(var(--form-columns), 1fr);
 }
 
+
+form .mandatory {
+    color: #f00;
+}
+
 fieldset[name] {
     display: inline-block;
 }

@@ -55,10 +55,15 @@ function createLabel(fd, tagName = 'label') {
   const label = document.createElement(tagName);
   label.setAttribute('for', fd.Id);
   label.className = 'field-label';
-  label.textContent = fd.Label || '';
+  label.innerHTML = fd.Label || '';
+  if (fd.Mandatory?.toLowerCase() === 'true' && fd.Type !== 'radio') {
+    label.innerHTML = `${label.innerHTML} <span class="mandatory">*</span>`;
+  }
+
   if (fd.Tooltip) {
     label.title = fd.Tooltip;
   }
+
   return label;
 }
 
@@ -248,7 +253,11 @@ async function createForm(formURL) {
     const el = renderField(fd);
     const input = el.querySelector('input,textarea,select');
     if (fd.Mandatory && fd.Mandatory.toLowerCase() === 'true') {
-      input.setAttribute('required', 'required');
+      if (fd.Type === 'fieldset') {
+        console.log("fieldset mandatory", fd, input);
+      } else {
+        input.setAttribute('required', 'required');
+      }
     }
     if (input) {
       input.id = fd.Id;
