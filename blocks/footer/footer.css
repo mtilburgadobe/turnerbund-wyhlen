@@ -31,7 +31,6 @@ footer .footer h4 {
 
 footer .footer-gallery {
   display: grid;
-  padding: 0 5%;
 }
 
 @media (min-width: 600px) {
@@ -67,6 +66,11 @@ footer .footer-gallery {
     list-style-type: none;
     font-size: 12px;
   }
+}
+
+footer .footer-gallery-item {
+  height: 105px;
+  width: 235px;
 }
 
 footer .footer-gallery img {

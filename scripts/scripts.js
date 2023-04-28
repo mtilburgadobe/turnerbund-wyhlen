@@ -17,19 +17,40 @@ import {
 const LCP_BLOCKS = ['cards']; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
-/**
- * Builds hero block and prepends to main in a new section.
- * @param {Element} main The container element
- */
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
+export async function getIndex(index, indexUrl) {
+  window.pageIndex = window.pageIndex || {};
+  if (!window.pageIndex[index]) {
+    const resp = await fetch(indexUrl);
+    if (!resp.ok) {
+      // eslint-disable-next-line no-console
+      console.error('loading index', resp);
+      return []; // do not cache in case of error
+    }
+    const json = await resp.json();
+    window.pageIndex[index] = json.data;
   }
+  return window.pageIndex[index];
+}
+
+/**
+ * Get the list of events from the query index
+ *
+ * @param {number} limit the number of entries to return
+ * @returns the posts as an array
+ */
+export async function getEvents(limit) {
+  const indexUrl = new URL(
+    '/events/query-index-events.json',
+    window.location.origin,
+  );
+  let index = 'events';
+  if (limit) {
+    indexUrl.searchParams.set('limit', limit);
+    index = index.concat(`-${limit}`);
+  }
+
+  const eventEntries = await getIndex(index, indexUrl.toString());
+  return eventEntries;
 }
 
 function buildSidebar(main) {
@@ -46,7 +67,6 @@ function buildSidebar(main) {
  */
 function buildAutoBlocks(main) {
   try {
-    buildHeroBlock(main);
     buildSidebar(main);
   } catch (error) {
     // eslint-disable-next-line no-console
