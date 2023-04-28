@@ -1,14 +1,69 @@
 /* header and nav layout */
 header .nav-social {
+  display: inline-block;
   background-color: var(--header-background-color);
-  width: 100%;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
   height: var(--nav-height);
 }
 
+header nav p {
+  margin: 0;
+  line-height: 1;
+}
+
+header .nav-social p {
+  width: 1px;
+  float: right;
+}
+
+header .social-icon {
+  display: inline-block;
+  background-color: var(--header-background-color);
+  width: 100%;
+  height: var(--nav-height);
+  font-family: FontAwesome, var(--body-font-family);
+  font-size: 12px;
+}
+
+header .icon-fb::before {
+  content: "\f082";
+  color: white;
+}
+
+header .icon-instagram::before {
+  content: "\f16d";
+  color: white;
+}
+
+header .icon-home {
+  font-family: FontAwesome, var(--body-font-family);
+  color: white;
+  font-size: 14px;
+}
+
+header .icon-home::before {
+  content: "\f015";
+  color: white;
+}
+
 header .nav-logo {
+  display: inline-block;
   background-color: white;
   width: 100%;
-  height: 100px;
+  height: 146px;
+}
+
+header .brand-logo {
+  margin-top: 25px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+header .nav-logo img {
+  float: right;
 }
 
 header .nav-wrapper {
@@ -56,11 +111,6 @@ header nav[aria-expanded="true"] {
     min-height: 0;
     overflow: visible;
   }
-}
-
-header nav p {
-  margin: 0;
-  line-height: 1;
 }
 
 header nav a:any-link {
@@ -168,7 +218,9 @@ header nav .nav-sections {
   flex: 1 1 auto;
   display: none;
   visibility: hidden;
-  background-color: var(--overlay-color);
+  background-color: var(--header-background-color);
+  color: white;
+  padding: 0 15px;
 }
 
 header nav[aria-expanded="true"] .nav-sections {
@@ -182,6 +234,9 @@ header nav .nav-sections ul  {
   padding-left: 0;
   font-size: var(--body-font-size-s);
   font-weight: 500;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 header nav .nav-sections ul > li {
@@ -193,7 +248,7 @@ header nav .nav-sections ul > li > ul {
 }
 
 header nav .nav-sections ul > li > ul > li {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 @media (min-width: 900px) {
@@ -209,7 +264,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 16px;
+    padding-right: 20px;
     cursor: pointer;
   }
 
@@ -243,7 +298,13 @@ header nav .nav-sections ul > li > ul > li {
   header nav .nav-sections > ul > li {
     flex: 0 1 auto;
     position: relative;
-    font-weight: 500;
+    font-weight: 400;
+    margin-top: -10px;
+    border-right: 1px solid rgb(255 255 255 / 20%);
+  }
+
+  header nav .nav-sections > ul > li > a {
+    padding-right: 20px;
   }
 
   header nav .nav-sections > ul > li > ul {
@@ -258,7 +319,7 @@ header nav .nav-sections ul > li > ul > li {
     width: 200px;
     margin-top: 12px;
     padding: 1em;
-    background-color: var(--highlight-background-color);
+    background-color: var(--header-background-color);
     white-space: initial;
   }
 
@@ -276,6 +337,10 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections > ul > li > ul > li {
     padding: 8px 0;
+  }
+
+  header nav .nav-sections .nav-drop > ul > li {
+    border-bottom: 1px solid rgb(255 255 255 / 20%);
   }
 }
 

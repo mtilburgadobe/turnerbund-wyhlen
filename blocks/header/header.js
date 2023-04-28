@@ -40,6 +40,7 @@ function focusNavSection() {
  * @param {Element} sections The container element
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
+
 function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
@@ -52,6 +53,7 @@ function toggleAllNavSections(sections, expanded = false) {
  * @param {Element} navSections The nav sections within the container element
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
+
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
@@ -111,6 +113,14 @@ export default async function decorate(block) {
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
+      // Add home icon to nav-sections
+      const homeIcon = document.createElement('li');
+      const homeLink = document.createElement('a');
+      homeLink.href = '/';
+      homeIcon.classList.add('icon-home');
+      homeIcon.append(homeLink);
+      navSections.children[0].prepend(homeIcon);
+
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
         navSection.addEventListener('click', () => {
@@ -121,6 +131,21 @@ export default async function decorate(block) {
           }
         });
       });
+    }
+
+    // Social links and brand logo end up in here
+    const navBrand = nav.querySelector('.nav-brand');
+    if (navBrand) {
+      const numChildren = navBrand.children.length;
+      for (let i = 0; i < numChildren; i += 1) {
+        // if it's a link, then it's a social icon
+        if (navBrand.children[i].children[0]
+          && navBrand.children[i].children[0].tagName === 'A') {
+          navBrand.children[i].classList.add('social-icon');
+        } else {
+          navBrand.children[i].classList.add('brand-logo');
+        }
+      }
     }
 
     // hamburger for mobile
@@ -136,7 +161,6 @@ export default async function decorate(block) {
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
-    decorateIcons(nav);
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
     navWrapper.append(nav);
@@ -150,6 +174,16 @@ export default async function decorate(block) {
     const socialNav = document.createElement('div');
     socialNav.classList.add('nav-social');
     navWrapper.prepend(socialNav);
+
+    // Move social icons to nav-social div
+    nav.querySelectorAll('.social-icon').forEach((navSection) => {
+      socialNav.appendChild(navSection);
+    });
+
+    const brandLogo = nav.querySelector('.brand-logo');
+    if (brandLogo) {
+      logoNav.appendChild(brandLogo);
+    }
 
     block.append(navWrapper);
   }
