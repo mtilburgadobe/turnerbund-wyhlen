@@ -1,18 +1,6 @@
 {
-  "project": "Summit EMEA Team 3",
+  "project": "Turnerbund Wyhlen",
   "plugins": [
-    {
-      "id": "tools",
-      "title": "Tools",
-      "isContainer": true
-    },
-    {
-      "containerId": "tools",
-      "title": "Preflight",
-      "id": "preflight",
-      "environments": ["dev", "preview", "live"],
-      "event": "preflight"
-    },
     {
       "title": "Publish (w)",
       "id": "newpublish",
