@@ -160,4 +160,22 @@ async function loadPage() {
   loadDelayed();
 }
 
+const preflight = ({ detail }) => {
+  const sk = detail.data;
+  // your custom code from button.action goes here
+  console.log ('preflight');
+};
+
+const sk = document.querySelector('helix-sidekick');
+if (sk) {
+  // sidekick already loaded
+  sk.addEventListener('custom:preflight', preflight);
+} else {
+  // wait for sidekick to be loaded
+  document.addEventListener('helix-sidekick-ready', () => {
+    document.querySelector('helix-sidekick')
+      .addEventListener('custom:preflight', preflight);
+  }, { once: true });
+}
+
 loadPage();
