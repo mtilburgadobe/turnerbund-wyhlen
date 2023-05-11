@@ -163,7 +163,8 @@ async function loadPage() {
 const preflight = ({ detail }) => {
   const sk = detail.data;
   // your custom code from button.action goes here
-  console.log ('preflight');
+  // eslint-disable-next-line no-console
+  console.log(`preflight: ${sk}`);
 };
 
 const sk = document.querySelector('helix-sidekick');
