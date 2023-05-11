@@ -167,15 +167,25 @@ const preflight = ({ detail }) => {
   console.log(`preflight: ${sk}`);
 };
 
+const newpublish = ({ detail }) => {
+  const sk = detail.data;
+  // your custom code from button.action goes here
+  // eslint-disable-next-line no-console
+  console.log(`newpublish: ${sk}`);
+};
+
 const sk = document.querySelector('helix-sidekick');
 if (sk) {
   // sidekick already loaded
   sk.addEventListener('custom:preflight', preflight);
+  sk.addEventListener('custom:newpublish', newpublish);
 } else {
   // wait for sidekick to be loaded
   document.addEventListener('helix-sidekick-ready', () => {
     document.querySelector('helix-sidekick')
       .addEventListener('custom:preflight', preflight);
+    document.querySelector('helix-sidekick')
+      .addEventListener('custom:newpublish', newpublish);
   }, { once: true });
 }
 

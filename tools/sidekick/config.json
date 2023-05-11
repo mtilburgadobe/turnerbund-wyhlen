@@ -12,6 +12,12 @@
       "id": "preflight",
       "environments": ["dev", "preview", "live"],
       "event": "preflight"
+    },
+    {
+      "title": "Publish (w)",
+      "id": "newpublish",
+      "environments": ["dev", "preview", "live"],
+      "event": "newpublish"
     }
   ]
 }
