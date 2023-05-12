@@ -160,7 +160,7 @@ async function loadPage() {
   loadDelayed();
 }
 
-const preflight = ( { detail } ) => {
+const preflight = ({ detail }) => {
   const sk = detail.data;
   // your custom code from button.action goes here
   // eslint-disable-next-line no-console

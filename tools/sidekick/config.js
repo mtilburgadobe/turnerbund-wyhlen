@@ -1,3 +1,3 @@
 window.hlx.initSidekick({
-  project: 'Turnerbund Wyhlen' 
+  project: 'Turnerbund Wyhlen',
 });
