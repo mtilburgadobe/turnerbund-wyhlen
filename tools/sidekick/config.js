@@ -15,6 +15,7 @@ const removeCardPreview = () => {
 };
 
 const toggleCardPreview = async (sk) => {
+  console.log('test');
   if (document.getElementById('hlx-sk-card-preview')) {
     removeCardPreview();
   } else {
@@ -234,7 +235,7 @@ window.hlx.initSidekick({
       condition: (sidekick) => sidekick.isHelix() && isArticle(sidekick.location.pathname),
       container: 'tools',
       button: {
-        text: 'Card Preview',
+        text: 'Card Preview 2',
         action: async (_, sk) => toggleCardPreview(sk),
       },
     },
