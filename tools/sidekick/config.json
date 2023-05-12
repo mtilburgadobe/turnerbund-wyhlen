@@ -2,10 +2,10 @@
   "project": "Turnerbund Wyhlen",
   "plugins": [
     {
-      "title": "Publish (w)",
-      "id": "newpublish",
-      "environments": ["dev", "preview", "live"],
-      "event": "newpublish"
+      "title": "Preflight",
+      "id": "preflight",
+      "environments": ["preview", "live"],
+      "event": "preflight"
     }
   ]
 }
