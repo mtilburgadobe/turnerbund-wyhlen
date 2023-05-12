@@ -103,6 +103,13 @@ async function loadEager(doc) {
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
+  if (document.querySelector('helix-sidekick')) {
+    import('../tools/sidekick/plugins.js');
+  } else {
+    document.addEventListener('helix-sidekick-ready', () => {
+      import('../tools/sidekick/plugins.js');
+    }, { once: true });
+  }
 }
 
 /**
@@ -160,23 +167,9 @@ async function loadPage() {
   loadDelayed();
 }
 
-const preflight = ({ detail }) => {
-  const sk = detail.data;
-  // your custom code from button.action goes here
-  // eslint-disable-next-line no-console
-  console.log(sk);
-};
-
-const sk = document.querySelector('helix-sidekick');
-if (sk) {
-  // sidekick already loaded
-  sk.addEventListener('custom:preflight', preflight);
-} else {
-  // wait for sidekick to be loaded
-  document.addEventListener('helix-sidekick-ready', () => {
-    document.querySelector('helix-sidekick')
-      .addEventListener('custom:preflight', preflight);
-  }, { once: true });
-}
-
 loadPage();
+/*
+// load plugins when sidekick is ready
+document.addEventListener('helix-sidekick-ready', () => {
+  import('../tools/sidekick/plugins.js');
+}, { once: true });*/

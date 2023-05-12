@@ -1,6 +1,67 @@
-/* eslint-disable import/no-absolute-path, import/no-unresolved */
+class BlogSidekickBanner {
+  constructor(id) {
+    this.banner = document.createElement('div');
+    this.banner.className = 'blog-sidekick-banner';
+    this.banner.id = id;
+    this.banner.appendChild(document.createElement('style')).textContent = `
+    .blog-sidekick-banner {
+      z-index: 9999998;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      background-color: red;
+      color: white;
+      padding: 0 20px;
+    }
+    .blog-sidekick-banner a:any-link {
+      color: white;
+    }
+    .blog-sidekick-banner input,
+    .blog-sidekick-banner button {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      background: transparent;
+      color: white;
+    }
+    .blog-sidekick-banner input {
+      outline: none;
+      border: none;
+      width: 400px;
+      text-overflow: ellipsis;
+    }
+    .blog-sidekick-banner button {
+      border: solid 1px white;
+      border-radius: 8px;
+      padding: 5px 8px;
+      margin-left: 5px;
+      user-selection: none;
+      cursor: pointer;
+    }`;
+    this.bannerContent = this.banner.appendChild(document.createElement('p'));
+    this.bannerContent.className = 'content';
+    document.body.prepend(this.banner);
+  }
 
-const isArticle = (path) => path.includes('/publish/') || path.includes('/drafts/');
+  querySelector(selector) {
+    return this.bannerContent.querySelector(selector);
+  }
+
+  write(content, timeout) {
+    this.bannerContent.innerHTML = content;
+    if (timeout) {
+      this.hide(timeout);
+    }
+  }
+
+  hide(timeout = 0) {
+    setTimeout(() => {
+      this.banner.remove();
+    }, timeout * 1000);
+  }
+}
 
 const cardPreviewEscListener = (keyEvt) => {
   if (keyEvt.key === 'Escape') {
@@ -14,7 +75,8 @@ const removeCardPreview = () => {
   window.removeEventListener('keydown', cardPreviewEscListener);
 };
 
-const toggleCardPreview = async (sk) => {
+const toggleCardPreview = async ({ detail }) => {
+  const { status } = detail.data;
   if (document.getElementById('hlx-sk-card-preview')) {
     removeCardPreview();
   } else {
@@ -42,7 +104,7 @@ const toggleCardPreview = async (sk) => {
       getBlogArticle,
       buildArticleCard,
     } = await import(`${window.location.origin}/scripts/scripts.js`);
-    $modal.append(buildArticleCard(await getBlogArticle(sk.location.pathname)));
+    $modal.append(buildArticleCard(await getBlogArticle(status.webPath)));
 
     const $overlay = document.createElement('div');
     $overlay.id = 'hlx-sk-card-preview';
@@ -72,11 +134,33 @@ const predictUrl = async (host, path) => {
   return `${host ? `https://${host}/` : ''}${pathsplits[1]}${publishPath}/${filename}`;
 };
 
-const copyArticleData = async (sk) => {
+const getPredictedUrl = async ({ detail }) => {
+  const { status } = detail.data;
+  const url = await predictUrl('blog.adobe.com', status.webPath);
+  const banner = new BlogSidekickBanner('hlx-sk-predicted-url');
+  banner.write(`
+    Predicted URL:
+    <input value="${url}">
+    <button class="copy">copy</button>
+    <button class="dismiss">dismiss</button>
+  `);
+  const copyButton = banner.querySelector('button.copy');
+  copyButton.focus();
+  copyButton.addEventListener('click', () => {
+    navigator.clipboard.writeText(url);
+    banner.hide();
+  });
+  const dismissButton = banner.querySelector('button.dismiss');
+  dismissButton.addEventListener('click', () => {
+    banner.hide();
+  });
+};
+
+const copyArticleData = async ({ detail }) => {
   const {
     getBlogArticle,
   } = await import(`${window.location.origin}/scripts/scripts.js`);
-  const { location, status } = sk;
+  const { location, status } = detail.data;
   const {
     date,
     image,
@@ -100,14 +184,15 @@ const copyArticleData = async (sk) => {
     new Date(status.preview.lastModified).valueOf(),
   ];
   navigator.clipboard.writeText(articleData.join('\t'));
-  sk.notify('Article data copied to clipboard');
+  const banner = new BlogSidekickBanner('get-article-data');
+  banner.write('Article data copied to clipboard', 5);
 };
 
 const generateFeed = (
   feedTitle = 'Adobe Blog',
   feedAuthor = 'Adobe',
   feedData = window.blogIndex?.data || [],
-  baseURL = `https://${window.hlx.sidekick.config.host}`,
+  baseURL = 'https://blog.adobe.com',
   limit = 50,
 ) => {
   const ns = 'http://www.w3.org/2005/Atom';
@@ -167,20 +252,24 @@ const generateFeed = (
 
 const hasFeed = () => !!document.querySelector('link[type="application/xml+atom"]');
 
-const updateFeed = async (sk) => {
+const updateFeed = async ({ detail }) => {
+  const feedBanner = new BlogSidekickBanner('update-feed');
+  if (!hasFeed) {
+    feedBanner.write('No feed defined for this page', 5);
+  }
   /* eslint-disable no-console */
-  const feedUrl = document.querySelector('link[type="application/xml+atom"]')?.href;
+  const feedUrl = document.querySelector('link[type="application/xml+atom"]')?.getAttribute('href');
   if (feedUrl && window.blogIndex) {
     const {
       connect,
       saveFile,
     } = await import(`${window.location.origin}/tools/sidekick/sharepoint.js`);
-    const { owner, repo, ref } = sk.config;
-    const feedPath = new URL(feedUrl).pathname;
+    const { owner, repo, ref } = detail.data.config;
+    const feedPath = new URL(feedUrl, 'https://blog.adobe.com').pathname;
     console.log(`Updating feed ${feedPath}`);
+    feedBanner.write('Please wait …');
     await connect(async () => {
       try {
-        sk.showModal('Please wait …', true);
         const feedXml = new Blob([generateFeed()], { type: 'application/atom+xml' });
         await saveFile(feedXml, feedPath);
         let resp = await fetch(`https://admin.hlx.page/preview/${owner}/${repo}/${ref}${feedPath}`, { method: 'POST' });
@@ -191,102 +280,18 @@ const updateFeed = async (sk) => {
         if (!resp.ok) {
           throw new Error(`Failed to publish ${feedPath}`);
         }
-        sk.notify(`Feed ${feedUrl} updated`);
+        feedBanner.write(`Feed <a href="${feedUrl}" target="_blank">${feedPath}</a> updated`, 5);
       } catch (e) {
         console.error(e);
-        sk.showModal('Failed to update feed, please try again later', false, 0);
+        feedBanner.write(`Failed to update feed ${feedPath}, please try again later`, 5);
       }
     });
   }
-  /* eslint-enable no-console */
 };
 
-window.hlx.initSidekick({
-  project: 'Blog',
-  hlx3: true,
-  host: 'blog.adobe.com',
-  pushDownSelector: 'header',
-  plugins: [
-    // TOOLS DROPDOWN -----------------------------------------------------------------
-    {
-      id: 'tools',
-      condition: (sk) => !sk.isEditor(),
-      button: {
-        text: 'Tools',
-        isDropdown: true,
-      },
-    },
-    // TAGGER -------------------------------------------------------------------------
-    {
-      id: 'tagger',
-      condition: (sk) => sk.isEditor() && (sk.location.search.includes('.docx&') || sk.location.search.includes('.md&')),
-      button: {
-        text: 'Tagger',
-        action: (_, sk) => {
-          const { config } = sk;
-          window.open(`https://${config.innerHost}/tools/tagger/index.html`, 'hlx-sidekick-tagger');
-        },
-      },
-    },
-    // CARD PREVIEW -------------------------------------------------------------------
-    {
-      id: 'card-preview',
-      condition: (sidekick) => sidekick.isHelix() && isArticle(sidekick.location.pathname),
-      container: 'tools',
-      button: {
-        text: 'Card Preview',
-        action: async (_, sk) => toggleCardPreview(sk),
-      },
-    },
-    // PREDICTED URL ------------------------------------------------------------------
-    {
-      id: 'predicted-url',
-      condition: (sidekick) => {
-        const { config, location } = sidekick;
-        return sidekick.isHelix()
-          && isArticle(location.pathname)
-          && config.host
-          && location.host !== config.host;
-      },
-      container: 'tools',
-      button: {
-        text: 'Copy Predicted URL',
-        action: async (_, sk) => {
-          const { config, location } = sk;
-          const url = await predictUrl(config.host, location.pathname);
-          navigator.clipboard.writeText(url);
-          sk.notify([
-            'Predicted URL copied to clipboard:',
-            url,
-          ]);
-        },
-      },
-    },
-    // ARTICLE DATA -------------------------------------------------------------------
-    {
-      id: 'article-data',
-      condition: (sidekick) => sidekick.isHelix() && isArticle(sidekick.location.pathname),
-      container: 'tools',
-      button: {
-        text: 'Copy Article Data',
-        action: async (_, sk) => copyArticleData(sk),
-      },
-    },
-    // PUBLISH ------------------------------------------------------------------------
-    // do not show publish button for drafts
-    {
-      id: 'publish',
-      condition: (sidekick) => sidekick.isHelix() && !sidekick.location.pathname.includes('/drafts/'),
-    },
-    // UPDATE FEED --------------------------------------------------------------------
-    {
-      id: 'feed',
-      condition: () => hasFeed(),
-      container: 'tools',
-      button: {
-        text: 'Update Feed',
-        action: async (_, sk) => updateFeed(sk),
-      },
-    },
-  ],
-});
+/* register listeners for custom events */
+const sk = document.querySelector('helix-sidekick');
+sk.addEventListener('custom:card-preview', toggleCardPreview);
+sk.addEventListener('custom:predicted-url', getPredictedUrl);
+sk.addEventListener('custom:copy-article-data', copyArticleData);
+sk.addEventListener('custom:update-feed', updateFeed);
