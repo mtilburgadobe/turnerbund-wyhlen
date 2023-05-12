@@ -20,9 +20,7 @@
       "title": "Card Preview",
       "environments": [ "dev", "preview" ],
       "containerId": "tools",
-      "event": "card-preview",
-      "excludePaths": [ "/**" ],
-      "includePaths": [ "**/publish/**", "**/drafts/**" ]
+      "event": "card-preview"
     },
     {
       "id": "predicted-url",
