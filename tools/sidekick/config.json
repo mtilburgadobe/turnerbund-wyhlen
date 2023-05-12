@@ -4,7 +4,6 @@
     {
       "title": "Preflight",
       "id": "preflight",
-      "environments": ["preview", "live"],
       "environments": ["dev", "preview", "live"],
       "event": "preflight"
     }
