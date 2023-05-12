@@ -100,11 +100,17 @@ const toggleCardPreview = async ({ detail }) => {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 10px 20px 0 rgba(0, 0, 0, 0.3);
       }
     </style>`;
+
+    console.log("here");
+    console.log(status);
+    status.isHelix();
+    
+    /*
     const {
       getBlogArticle,
       buildArticleCard,
     } = await import(`${window.location.origin}/scripts/scripts.js`);
-    $modal.append(buildArticleCard(await getBlogArticle(status.webPath)));
+    $modal.append(buildArticleCard(await getBlogArticle(status.webPath)));*/
 
     const $overlay = document.createElement('div');
     $overlay.id = 'hlx-sk-card-preview';

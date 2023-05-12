@@ -17,7 +17,7 @@
     },
     {
       "id": "card-preview",
-      "title": "Card Preview",
+      "title": "Card Preview 3",
       "environments": [ "dev", "preview" ],
       "containerId": "tools",
       "event": "card-preview"
