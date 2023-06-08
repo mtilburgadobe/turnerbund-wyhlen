@@ -2,5 +2,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 
 Fix #<gh-issue-id>
 Test URLs:
-- Before: https://main--turnerbund-wyhlen--mtilburgadobe.hlx.page/
-- After: https://<branch>--turnerbund-wyhlen--mtilburgadobe.hlx.page/
+- Before: https://main--turnerbund-wyhlen--mtilburgadobe.hlx.live/
+- After: https://<branch>--turnerbund-wyhlen--mtilburgadobe.hlx.live/
